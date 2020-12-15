@@ -23,23 +23,27 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 ### Instalación 🔧
 
-  1. Agregar el repositorio a tu máquina local dentro de la carpeta src de tu catkin workspace:
+  1. Crear las carpetas common y perception dentro de la carpeta src:
 ```
-git clone https://github.com/felipetobars/segmt_kitti.git
+mkdir common
+mkdir -p perception/libs
 ```
-  2. Extraer las carpetas common y percpetion (estando dentro de la carpeta src):
+  2. Clonear la librería common del repositorio de LidarPerception (esta no se modificó para el proyecto) dentro de la carpeta common:
   ```
-mv segmt_kitti/common .
+cd common
+git clone https://github.com/LidarPerception/common_lib.git libs
 ```
+  3. Clonar las librerías object_builders, roi_filters y segments dentro de la carpeta perception/libs:
   ```
-mv segmt_kitti/perception .
+cd ~/catkin_ws/src/perception/libs/
+git clone https://github.com/felipetobars/segmt_kitti_obj_builders.git object_builders
+git clone https://github.com/felipetobars/segmt_kitti_roi_filters.git roi_filters
+git clone https://github.com/felipetobars/segmt_kitti_segmenters.git segmenters
 ```
-  3. Volver a la carpeta catkin_ws y hacer make:
+  4. Realizar make y agregar las variables que el entorno de ROS necesita (volviendo a la carpeta del espacio de trabajo catkin):
   ```
+cd ~/catkin_ws
 catkin_make
-```
-  4. Agregar las variables que el entorno de ROS necesita:
-  ```
 source devel/setup.bash
 ```
   (Se recomienda tener la carpeta que tiene los archivos rosbag en la misma ubicación que segmt_kitti, es decir en la ruta **catkin_ws/src**)
